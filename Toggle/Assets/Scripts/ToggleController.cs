@@ -25,12 +25,14 @@ public class ToggleController : MonoBehaviour
 	public GameObject onIcon;
 	public GameObject offIcon;
 
-
 	public float speed;
 	static float t = 0.0f;
 
 	private bool switching = false;
-
+	
+	[Space(20)]
+	public UnityEvent OnAction;
+	public UnityEvent OffAction;
 
 	void Awake()
 	{
@@ -42,7 +44,6 @@ public class ToggleController : MonoBehaviour
 		offPosX = onPosX * -1;
 
 	}
-
 
 	void Start()
 	{
@@ -73,15 +74,16 @@ public class ToggleController : MonoBehaviour
 
 	public void DoYourStaff()
 	{
-		Debug.Log(isOn);
+		if (isOn)
+			OnAction.Invoke();
+		else
+			OffAction.Invoke();
 	}
 
 	public void Switching()
 	{
 		switching = true;
 	}
-		
-
 
 	public void Toggle(bool toggleStatus)
 	{
